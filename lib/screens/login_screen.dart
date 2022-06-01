@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:donateer/provider/google_sign_in.dart';
 import 'package:donateer/screens/register_income_screen.dart';
 import 'package:donateer/screens/tabs_screen.dart';
@@ -92,25 +93,42 @@ class _LoginScreenState extends State<LoginScreen> {
                   label: Text('Sign In with Google'), 
                   onPressed: () {
                     final provider = Provider.of<GoogleSignInProvider>(context, listen: false);
-                    provider.googleLogin().then((userCredential) => {
-                      // User exists and is a new Google user
-                        if (userCredential != null) {
-                          if (userCredential.additionalUserInfo.isNewUser) {
+                    provider.googleLogin().then((userCredential) async {
+                      // User exists, if not do nothing
+                      if (userCredential != null) {
+                        print("1. User credential received");
+                        print(userCredential);
+                        print("User UID");
+                        print(userCredential.user.uid);
+                        // check if income is defined, if not redirect to income page
+                        var firestoreUserData;
+                        await FirebaseFirestore.instance
+                          .collection('Users')
+                          .doc(userCredential.user.uid)
+                          .get().then((DocumentSnapshot doc) {
+                            firestoreUserData = doc.data() as Map<String, dynamic>;
+                            print("2. Firestore data:");
+                            print(firestoreUserData);
+                          },);
+                        print("2. Firestore data:");
+                        print(firestoreUserData);
+                        if (!userCredential.additionalUserInfo.isNewUser && firestoreUserData.income) {
                           // Not a new Google user
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (context) => TabsScreen(),
                             ),
-                          ),
+                          );
                         } else {
-                            Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (context) => RegisterIncomeScreen(user: userCredential.user,),
-                            ),
+                          // New Google user
+                          Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => RegisterIncomeScreen(user: userCredential.user,),
                           ),
+                          );
                         } 
-                      }
-                    });
+                      };
+                    },);
                   },
                 ),
                 SizedBox(height: 15),

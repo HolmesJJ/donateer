@@ -45,6 +45,8 @@ class _RegisterIncomeScreenState extends State<RegisterIncomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print("Received user!!!!");
+    print(widget.user);
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
