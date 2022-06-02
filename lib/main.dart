@@ -18,6 +18,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    User? user = FirebaseAuth.instance.currentUser;
+    print("USER: ");
+    print(user);
     return ChangeNotifierProvider(
       create: (context) => GoogleSignInProvider(),
       child: MaterialApp(
@@ -65,17 +68,18 @@ class MyApp extends StatelessWidget {
                 ),
               ),
             )),
-        home: StreamBuilder(
-          stream: FirebaseAuth.instance.authStateChanges(),
-          builder: (ctx, userSnapshot) {
-            if (userSnapshot.hasData ||
-                FirebaseAuth.instance.currentUser != null) {
-              return TabsScreen();
-            }
-            return LoginScreen();
-          },
-        ),
-        // home: LoginScreen(),
+        // home: StreamBuilder(
+        //   stream: FirebaseAuth.instance.authStateChanges(),
+        //   builder: (ctx, userSnapshot) {
+        //     print('NEW SNAPSHOT');
+        //     if (userSnapshot.hasData ||
+        //         FirebaseAuth.instance.currentUser != null) {
+        //       return TabsScreen();
+        //     }
+        //     return LoginScreen();
+        //   },
+        // ),
+        home: user != null ? TabsScreen() : LoginScreen(),
       ),
     );
   }

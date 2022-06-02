@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,14 @@ class GoogleSignInProvider extends ChangeNotifier {
 
       UserCredential? userCredential = await FirebaseAuth.instance
           .signInWithCredential(credential)
-          .then((UserCredential userCredential) {
+          .then((UserCredential userCredential) async {
+        await FirebaseFirestore.instance
+            .collection('Users')
+            .doc(userCredential.user!.uid)
+            .set({
+          'username': userCredential.user!.displayName,
+          'email': userCredential.user!.email,
+        });
         return userCredential;
       });
 

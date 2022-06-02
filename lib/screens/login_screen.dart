@@ -92,22 +92,26 @@ class _LoginScreenState extends State<LoginScreen> {
                   label: Text('Sign In with Google'), 
                   onPressed: () {
                     final provider = Provider.of<GoogleSignInProvider>(context, listen: false);
-                    provider.googleLogin().then((userCredential) => {
+                    provider.googleLogin().then((userCredential) {
                       // User exists and is a new Google user
                         if (userCredential != null) {
-                          if (userCredential.additionalUserInfo.isNewUser) {
+                          print("USER CREDENTIALSS");
+                          print(userCredential);
+                          if (!userCredential.additionalUserInfo.isNewUser) {
+                            print('NOT NEW USER');
                           // Not a new Google user
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (context) => TabsScreen(),
                             ),
-                          ),
+                          );
                         } else {
+                          print("NEW USER");
                             Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (context) => RegisterIncomeScreen(user: userCredential.user,),
                             ),
-                          ),
+                          );
                         } 
                       }
                     });

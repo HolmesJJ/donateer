@@ -45,6 +45,7 @@ class _RegisterIncomeScreenState extends State<RegisterIncomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print("REACHED INCOME PAGE");
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -100,9 +101,7 @@ class _RegisterIncomeScreenState extends State<RegisterIncomeScreen> {
                         await FirebaseFirestore.instance
                           .collection('Users')
                           .doc(widget.user!.uid)
-                          .set({
-                            'username': widget.userName,
-                            'email': widget.userEmail,
+                          .update({
                             'income': _income,
                         });
                       };
