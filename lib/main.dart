@@ -25,6 +25,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   User? user = FirebaseAuth.instance.currentUser;
   bool hasIncome = false;
+  bool isLoaded = false;
 
   @override
   void initState() {
@@ -35,13 +36,14 @@ class _MyAppState extends State<MyApp> {
   getIncome() async {
     if (user != null) {
       var data = await FirebaseFirestore.instance
-                          .collection('Users')
-                          .doc(user!.uid).get();
-    setState(() {
-      hasIncome = data['income'] != null;
-    });
+          .collection('Users')
+          .doc(user!.uid)
+          .get();
+      setState(() {
+        isLoaded = true;
+        hasIncome = data['income'] != null;
+      });
     }
-                                             
   }
 
   @override
@@ -93,19 +95,23 @@ class _MyAppState extends State<MyApp> {
                 ),
               ),
             )),
-        home: StreamBuilder(
-          stream: FirebaseAuth.instance.authStateChanges(),
-          builder: (ctx, userSnapshot) {
-            if (!userSnapshot.hasData) {
-              return LoginScreen();
-            }
-            else if (hasIncome) {
-              return TabsScreen();
-            }
-            return RegisterIncomeScreen();
-          },
-        ),
-        // home: LoginScreen(),
+        // home: StreamBuilder(
+        //   stream: FirebaseAuth.instance.authStateChanges(),
+        //   builder: (ctx, userSnapshot) {
+        //     if (!userSnapshot.hasData) {
+        //       return LoginScreen();
+        //     }
+        //     else if (hasIncome) {
+        //       return TabsScreen();
+        //     }
+        //     return RegisterIncomeScreen();
+        //   },
+        // ),
+        home: (user != null)
+            // if user present, check if there is income
+            ? (hasIncome ? TabsScreen() : RegisterIncomeScreen())
+            // if no user and no income
+            : LoginScreen(),
       ),
     );
   }
