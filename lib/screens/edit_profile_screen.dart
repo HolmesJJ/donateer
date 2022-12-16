@@ -140,7 +140,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     });
                   },
                   decoration: const InputDecoration(
-                      labelText: "Enter your monthly income"),
+                      labelText: "Enter your monthly income (optional)"),
                   keyboardType: TextInputType.number,
                   inputFormatters: <TextInputFormatter>[
                     FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),

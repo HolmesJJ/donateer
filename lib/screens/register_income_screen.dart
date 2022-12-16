@@ -75,7 +75,7 @@ class _RegisterIncomeScreenState extends State<RegisterIncomeScreen> {
                           _hourlyIncome = ((int.parse(value) / 160).floor()).toString();
                         });
                       },
-                      decoration: const InputDecoration(labelText: "Enter your monthly income"),
+                      decoration: const InputDecoration(labelText: "Enter your monthly income (optional)"),
                       keyboardType: TextInputType.number,
                       inputFormatters: <TextInputFormatter>[
                     FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
@@ -96,7 +96,7 @@ class _RegisterIncomeScreenState extends State<RegisterIncomeScreen> {
                             .createUserWithEmailAndPassword(
                                 email: widget.userEmail!,
                                 password: widget.userPassword!)
-                            .then((UserCredential userCredential) {return userCredential.user});
+                            .then((UserCredential userCredential) {return userCredential.user;});
                         await user!.updateDisplayName(widget.userName).then((value) => null);
 
                         await FirebaseFirestore.instance
