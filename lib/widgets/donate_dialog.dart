@@ -142,7 +142,7 @@ class _DonateDialogState extends State<DonateDialog> {
     return AlertDialog(
       backgroundColor: Theme.of(context).secondaryHeaderColor,
       scrollable: true,
-      title: const Text('Donationing your time'),
+      title: Text('Which upcoming work hours of yours would you like to pledge to ${widget.name}? Please choose a date and time slot below:'),
       content: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Form(

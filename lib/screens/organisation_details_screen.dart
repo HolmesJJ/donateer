@@ -143,7 +143,7 @@ class _OrganisationDetailsScreenState extends State<OrganisationDetailsScreen> {
                       ],
                     ),
                     ElevatedButton(
-                      child: const Text('NEXT'),
+                      child: const Text('I would like to contribute to this charity'),
                       onPressed: () {
                         Navigator.pushAndRemoveUntil(
                           context,
