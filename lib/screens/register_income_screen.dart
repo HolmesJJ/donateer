@@ -1,4 +1,4 @@
-import 'package:donateer/screens/tabs_screen.dart';
+import 'package:donateer/screens/introduction_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -117,13 +117,12 @@ class _RegisterIncomeScreenState extends State<RegisterIncomeScreen> {
                             'hourlyIncome': _hourlyIncome,
                         });
                       };
-                      Navigator.of(context)
-                        .pushAndRemoveUntil(
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                TabsScreen(),
-                          ),
-                          (Route<dynamic> route) => false,
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => IntroductionScreen(),
+                        ),
+                        (route) => false,
                       );
                     },
                   ),
