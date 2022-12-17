@@ -4,6 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import './organisation_details_screen.dart';
 
 class FavouritesScreen extends StatefulWidget {
+
+  const FavouritesScreen ({ Key? key }): super(key: key);
+
   @override
   State<FavouritesScreen> createState() => _FavouritesScreenState();
 }
@@ -67,8 +70,8 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      minimum: EdgeInsets.all(22),
-      child: Container(
+      minimum: const EdgeInsets.all(22),
+      child: SizedBox(
         height: MediaQuery.of(context).size.height,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,7 +83,7 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                     style: Theme.of(context).textTheme.headline1),
               ],
             ),
-            _resultsList.length == 0
+            _resultsList.isEmpty
                 ? const Expanded(
                     child: Center(
                       child: Text('No favourites added yet, get started!'),

@@ -1,13 +1,14 @@
 import 'package:donateer/screens/tabs_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProgressScreen extends StatefulWidget {
-  ProgressScreen({Key? key, required this.donated, required this.toDonate})
+  final List donated;
+  final List toDonate;
+
+  const ProgressScreen({Key? key, required this.donated, required this.toDonate})
       : super(key: key);
-  List donated;
-  List toDonate;
+
   @override
   State<ProgressScreen> createState() => _ProgressScreenState();
 }
@@ -17,9 +18,10 @@ class _ProgressScreenState extends State<ProgressScreen> {
 
   @override
   void initState() {
-    print("Previous values");
-    print(widget.donated);
-    print(widget.toDonate);
+    super.initState();
+    // print("Previous values");
+    // print(widget.donated);
+    // print(widget.toDonate);
   }
 
   String _formatExactDuration(Duration duration) {
@@ -32,7 +34,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        minimum: EdgeInsets.all(22),
+        minimum: const EdgeInsets.all(22),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,7 +46,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => TabsScreen(tabNo: 2),
+                          builder: (context) => const TabsScreen(tabNo: 2),
                         ),
                         (route) => false,
                       );
@@ -64,12 +66,12 @@ class _ProgressScreenState extends State<ProgressScreen> {
                 itemBuilder: (context, index) {
                   return Card(
                     elevation: 5,
-                    margin: EdgeInsets.symmetric(
+                    margin: const EdgeInsets.symmetric(
                       vertical: 8,
                       horizontal: 5,
                     ),
                     child: Padding(
-                      padding: EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(5),
                       child: ListTile(
                         title: Text(
                           widget.toDonate[index]['name'],
@@ -110,12 +112,12 @@ class _ProgressScreenState extends State<ProgressScreen> {
                 itemBuilder: (context, index) {
                   return Card(
                     elevation: 5,
-                    margin: EdgeInsets.symmetric(
+                    margin: const EdgeInsets.symmetric(
                       vertical: 8,
                       horizontal: 5,
                     ),
                     child: Padding(
-                      padding: EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(5),
                       child: ListTile(
                         title: Text(
                           widget.donated[index]['name'],

@@ -10,6 +10,9 @@ import './login_screen.dart';
 import './progress_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
+  
+  const ProfileScreen ({ Key? key }): super(key: key);
+
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
@@ -31,11 +34,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   String income = '';
 
+  @override
   void initState() {
-    _getUserInfo();
+    super.initState();
+    getUserInfo();
   }
 
-  void _getUserInfo() async {
+  void getUserInfo() async {
     int timeDonated = 0;
     int timeToDonate = 0;
     DocumentSnapshot doc = await FirebaseFirestore.instance
@@ -44,8 +49,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         .get();
     final data = doc.data() as Map<String, dynamic>;
     var donations = data['donations'];
-    print("Donations");
-    print(donations);
+    // print("Donations");
+    // print(donations);
     donations.forEach((donation) {
       DateTime startTime = DateTime.parse(donation['start']);
       int duration = donation['duration'];
@@ -60,36 +65,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
         toDonate.add(donation);
       }
     });
-    print("Results:");
-    print("Time donated");
-    print(timeDonated);
-    print("Amount donated");
-    print(amountDonated);
-    print("Time to donate");
-    print(timeToDonate);
-    print("Amount to donate");
-    print(amountToDonate);
-
-    print("Formated hours:");
-    print(hoursDonated);
-    print(hoursToDonate);
+    // print("Results:");
+    // print("Time donated");
+    // print(timeDonated);
+    // print("Amount donated");
+    // print(amountDonated);
+    // print("Time to donate");
+    // print(timeToDonate);
+    // print("Amount to donate");
+    // print(amountToDonate);
+    // print("Formated hours:");
+    // print(hoursDonated);
+    // print(hoursToDonate);
     setState(() {
-      hoursDonated = _formatDuration(Duration(minutes: timeDonated));
-      hoursToDonate = _formatDuration(Duration(minutes: timeToDonate));
+      hoursDonated = formatDuration(Duration(minutes: timeDonated));
+      hoursToDonate = formatDuration(Duration(minutes: timeToDonate));
     });
   }
 
-  String _formatDuration(Duration duration) {
+  String formatDuration(Duration duration) {
     String twoDigits(int n) => n.toString().padLeft(2, "0");
-    String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
+    int durationInMinutes = duration.inMinutes.remainder(60);
+    String twoDigitMinutes = twoDigits(durationInMinutes);
     int hours = duration.inHours;
     // never donate at all
-    if (hours == 0 && duration.inMinutes == 0)
-      return "${twoDigitMinutes} hours";
+    if (hours == 0 && duration.inMinutes == 0) {
+      return "$twoDigitMinutes hours";
+    }
     // less than 1 hr
     if (hours < 1) {
-      if (twoDigitMinutes == 1) return "${twoDigitMinutes} minute";
-      return "${twoDigitMinutes} minutes";
+      if (durationInMinutes == 1) return "$twoDigitMinutes minute";
+      return "$twoDigitMinutes minutes";
     }
     // 1 hr or more, only show hour
     if (hours == 1) {
@@ -102,8 +108,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      minimum: EdgeInsets.all(22),
-      child: Container(
+      minimum: const EdgeInsets.all(22),
+      child: SizedBox(
         height: MediaQuery.of(context).size.height,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,14 +129,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       listen: false,
                     );
                     // check if Google is used, if used then sign out
-                    final GoogleSignIn googleSignIn = new GoogleSignIn();
+                    final GoogleSignIn googleSignIn = GoogleSignIn();
                     googleSignIn.isSignedIn().then((s) {
                       provider.logout();
                     });
                     await FirebaseAuth.instance.signOut();
                     Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
-                        builder: (context) => LoginScreen(),
+                        builder: (context) => const LoginScreen(),
                       ),
                       (Route<dynamic> route) => false,
                     );
@@ -165,7 +171,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       onPressed: () {
                         Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
-                            builder: (context) => EditProfileScreen(),
+                            builder: (context) => const EditProfileScreen(),
                           ),
                           (Route<dynamic> route) => false,
                         );
@@ -187,10 +193,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     trailing: IconButton(
                       icon: const Icon(Icons.arrow_forward_ios),
                       onPressed: () {
-                        print("Donated");
-                        print(donated);
-                        print("To donate");
-                        print(toDonate);
+                        // print("Donated");
+                        // print(donated);
+                        // print("To donate");
+                        // print(toDonate);
                         Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
                             builder: (context) => ProgressScreen(
@@ -216,7 +222,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
-                  child: Container(
+                  child: SizedBox(
                     height: 80,
                     child: Card(
                       child: Align(
@@ -230,7 +236,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 Expanded(
-                  child: Container(
+                  child: SizedBox(
                     height: 80,
                     child: Card(
                       child: Align(
@@ -249,7 +255,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
-                  child: Container(
+                  child: SizedBox(
                     height: 80,
                     child: Card(
                       child: Align(
@@ -263,7 +269,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 Expanded(
-                  child: Container(
+                  child: SizedBox(
                     height: 80,
                     child: Card(
                       child: Align(

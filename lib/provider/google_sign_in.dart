@@ -44,7 +44,7 @@ class GoogleSignInProvider extends ChangeNotifier {
 
       return userCredential;
     } catch (e) {
-      print(e.toString());
+      // print(e.toString());
     }
   }
 

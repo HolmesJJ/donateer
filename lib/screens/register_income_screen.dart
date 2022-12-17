@@ -5,7 +5,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 
 class RegisterIncomeScreen extends StatefulWidget {
-  RegisterIncomeScreen({
+  final String? userEmail;
+  final String? userName;
+  final String? userPassword;
+  final User? user;
+
+  const RegisterIncomeScreen({
     Key? key,
     this.userEmail,
     this.userName,
@@ -13,28 +18,24 @@ class RegisterIncomeScreen extends StatefulWidget {
     this.user,
   }) : super(key: key);
 
-  String? userEmail;
-  String? userName;
-  String? userPassword;
-  User? user;
-
   @override
   _RegisterIncomeScreenState createState() => _RegisterIncomeScreenState();
 }
 
 class _RegisterIncomeScreenState extends State<RegisterIncomeScreen> {
   User? user = FirebaseAuth.instance.currentUser;
-  String _income = '';
+  // final String _income = '';
   String _hourlyIncome = '';
-  TextEditingController incomeController = new TextEditingController();
-  var _isLoading = false;
+  TextEditingController incomeController = TextEditingController();
+  // final _isLoading = false;
   var isGoogleUser = true;
 
+  @override
   void initState() {
+    super.initState();
     setState(() {
       isGoogleUser = user != null;
     });
-    super.initState();
   }
 
   // List of items in our dropdown menu
@@ -54,9 +55,9 @@ class _RegisterIncomeScreenState extends State<RegisterIncomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-      minimum: EdgeInsets.all(22),
+      minimum: const EdgeInsets.all(22),
       child: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
             height: MediaQuery.of(context).size.height - 44,
               child: Column(
                 children: <Widget>[
@@ -116,11 +117,11 @@ class _RegisterIncomeScreenState extends State<RegisterIncomeScreen> {
                             'income': incomeController.text,
                             'hourlyIncome': _hourlyIncome,
                         });
-                      };
+                      }
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => IntroductionScreen(),
+                          builder: (context) => const IntroductionScreen(),
                         ),
                         (route) => false,
                       );

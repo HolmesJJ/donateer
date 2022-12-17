@@ -6,7 +6,7 @@ import './organisation_details_screen.dart';
 
 class DonationScreen extends StatelessWidget {
   final Map obj;
-  User? user = FirebaseAuth.instance.currentUser;
+  final User? user = FirebaseAuth.instance.currentUser;
 
   DonationScreen({Key? key, required this.obj}) : super(key: key);
 
@@ -32,7 +32,7 @@ class DonationScreen extends StatelessWidget {
                 onPressed: () {})
           ]),
       body: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
           height: MediaQuery.of(context).size.height - 140,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

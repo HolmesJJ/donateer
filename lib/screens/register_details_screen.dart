@@ -3,6 +3,9 @@ import './register_income_screen.dart';
 import './login_screen.dart';
 
 class RegisterDetailsScreen extends StatefulWidget {
+
+  const RegisterDetailsScreen ({ Key? key }): super(key: key);
+
   @override
   _RegisterDetailsScreenState createState() => _RegisterDetailsScreenState();
 }
@@ -13,7 +16,7 @@ class _RegisterDetailsScreenState extends State<RegisterDetailsScreen> {
   final _usernameController = TextEditingController();
   final _passwordTextController = TextEditingController();
 
-  void _trySubmit() {
+  void trySubmit() {
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
 
@@ -36,9 +39,9 @@ class _RegisterDetailsScreenState extends State<RegisterDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        minimum: EdgeInsets.all(22),
+        minimum: const EdgeInsets.all(22),
         child: SingleChildScrollView(
-          child: Container(
+          child: SizedBox(
             height: MediaQuery.of(context).size.height - 44,
             child: Form(
               key: _formKey,
@@ -90,7 +93,7 @@ class _RegisterDetailsScreenState extends State<RegisterDetailsScreen> {
                   const Spacer(),
                   ElevatedButton(
                     child: const Text('Continue'),
-                    onPressed: _trySubmit,
+                    onPressed: trySubmit,
                   ),
                   TextButton(
                     child: const Text('Already have an account? Log In',
@@ -101,7 +104,7 @@ class _RegisterDetailsScreenState extends State<RegisterDetailsScreen> {
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => LoginScreen(),
+                          builder: (context) => const LoginScreen(),
                         ),
                         (route) => false,
                       );

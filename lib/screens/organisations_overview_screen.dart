@@ -7,9 +7,9 @@ import '../widgets/filter_dialog.dart';
 import './tabs_screen.dart';
 
 class OrganisationsOverviewScreen extends StatefulWidget {
-  final filter;
+  final dynamic filter;
 
-  OrganisationsOverviewScreen({Key? key, this.filter}) : super(key: key);
+  const OrganisationsOverviewScreen({Key? key, this.filter}) : super(key: key);
 
   @override
   State<OrganisationsOverviewScreen> createState() =>
@@ -20,7 +20,7 @@ class _OrganisationsOverviewScreenState
     extends State<OrganisationsOverviewScreen> {
   User? user = FirebaseAuth.instance.currentUser;
   bool search = false;
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
   late Future resultsLoaded;
   List _allResults = [];
   List _resultsList = [];
@@ -111,7 +111,7 @@ class _OrganisationsOverviewScreenState
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      minimum: EdgeInsets.all(22),
+      minimum: const EdgeInsets.all(22),
       child: Column(
         children: [
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
@@ -157,7 +157,7 @@ class _OrganisationsOverviewScreenState
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
-                      return FilterDialog();
+                      return const FilterDialog();
                     },
                   );
                 },
@@ -176,7 +176,7 @@ class _OrganisationsOverviewScreenState
                     onPressed: () {
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
-                          builder: (context) => TabsScreen(),
+                          builder: (context) => const TabsScreen(),
                         ),
                       );
                     },

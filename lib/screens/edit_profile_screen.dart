@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class EditProfileScreen extends StatefulWidget {
+
+  const EditProfileScreen ({ Key? key }): super(key: key);
+
   @override
   _EditProfileScreenState createState() => _EditProfileScreenState();
 }
@@ -20,10 +23,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   void initState() {
-    _getUserInfo();
+    super.initState();
+    getUserInfo();
   }
 
-  void _trySubmit() async {
+  void trySubmit() async {
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
 
@@ -42,14 +46,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     }
   }
 
-  void _getUserInfo() async {
+  void getUserInfo() async {
     DocumentSnapshot doc = await FirebaseFirestore.instance
         .collection('Users')
         .doc(user!.uid)
         .get();
     final data = doc.data() as Map<String, dynamic>;
-    print("Retrieved data");
-    print(data);
+    // print("Retrieved data");
+    // print(data);
     setState(() {
       _nameTextController = TextEditingController(text: data['username']);
       _emailTextController = TextEditingController(text: data['email']);
@@ -69,15 +73,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
-          builder: (context) => TabsScreen(tabNo: 2),
+          builder: (context) => const TabsScreen(tabNo: 2),
         ),
         (Route<dynamic> route) => false);
   }
 
   @override
   Widget build(BuildContext context) {
-    print("User:");
-    print(user);
+    // print("User:");
+    // print(user);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -152,7 +156,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 const Spacer(),
                 ElevatedButton(
                   child: const Text('Update'),
-                  onPressed: _trySubmit,
+                  onPressed: trySubmit,
                 ),
               ],
             ),

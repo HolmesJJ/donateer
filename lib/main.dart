@@ -14,11 +14,11 @@ import './screens/tabs_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
-  MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -36,19 +36,19 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<bool> checkIncome() async {
-    user = await FirebaseAuth.instance.currentUser;
-    print("CHECKING INCOME AND USER");
-    print("Has user?");
+    user = FirebaseAuth.instance.currentUser;
+    // print("CHECKING INCOME AND USER");
+    // print("Has user?");
     if (user != null) {
-      print("Yes! User details:");
-      print(user);
+      // print("Yes! User details:");
+      // print(user);
       DocumentSnapshot doc = await FirebaseFirestore.instance
           .collection('Users')
           .doc(user!.uid)
           .get();
       final data = doc.data() as Map<String, dynamic>;
-      print("Retrieved data: ");
-      print(data);
+      // print("Retrieved data: ");
+      // print(data);
       hasUser = true;
       return data.containsKey('income');
     }
@@ -85,11 +85,9 @@ class _MyAppState extends State<MyApp> {
                 backgroundColor: Colors.white, foregroundColor: Colors.black),
             elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(
-                minimumSize: const Size(double.infinity, 45),
+                foregroundColor: Colors.white, minimumSize: const Size(double.infinity, 45), backgroundColor: Colors.black,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10)),
-                primary: Colors.black, //button color
-                onPrimary: Colors.white,
               ),
             ),
             textButtonTheme: TextButtonThemeData(
@@ -101,9 +99,7 @@ class _MyAppState extends State<MyApp> {
             ),
             outlinedButtonTheme: OutlinedButtonThemeData(
               style: OutlinedButton.styleFrom(
-                primary: Colors.black,
-                //padding: EdgeInsets.symmetric(horizontal: 15),
-                shape: const RoundedRectangleBorder(
+                foregroundColor: Colors.black, shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(50)),
                 ),
               ),
@@ -115,8 +111,8 @@ class _MyAppState extends State<MyApp> {
             BuildContext context,
             AsyncSnapshot<bool> snapshot,
           ) {
-            print("Snapshot:");
-            print(snapshot);
+            // print("Snapshot:");
+            // print(snapshot);
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Scaffold(
                 body: Center(
@@ -137,12 +133,12 @@ class _MyAppState extends State<MyApp> {
                 ),
               );
             } else if (snapshot.connectionState == ConnectionState.done) {
-              print("Has user 2nd check");
-              print(hasUser);
-              print(user);
+              // print("Has user 2nd check");
+              // print(hasUser);
+              // print(user);
               // No user at all
               if (!hasUser) {
-                return LoginScreen();
+                return const LoginScreen();
               }
               // Has user
               if (snapshot.hasError) {
@@ -150,10 +146,10 @@ class _MyAppState extends State<MyApp> {
               } else if (snapshot.hasData) {
                 if (snapshot.data!) {
                   // user has income
-                  return TabsScreen();
+                  return const TabsScreen();
                 } else {
                   // user has not entered income yet
-                  return RegisterIncomeScreen();
+                  return const RegisterIncomeScreen();
                 }
               } else {
                 return const Text('Empty data');

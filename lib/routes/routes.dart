@@ -13,35 +13,34 @@ class RouteManager {
   static const tabsPage = '/tabs';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    var valuePassed;
-
-    if (settings.arguments != null) {
-      valuePassed = settings.arguments as Map<String, dynamic>;
-    }
+    // Map<String, dynamic> valuePassed;
+    // if (settings.arguments != null) {
+    //   valuePassed = settings.arguments as Map<String, dynamic>;
+    // }
 
     switch (settings.name) {
       case loginPage:
         return MaterialPageRoute(builder: (context) {
-          return LoginScreen();
+          return const LoginScreen();
         });
 
       case registerDetails:
         return MaterialPageRoute(builder: (context) {
-          return RegisterDetailsScreen();
+          return const RegisterDetailsScreen();
         });
 
       case registerIncome:
         return MaterialPageRoute(builder: (context) {
-          return RegisterIncomeScreen();
+          return const RegisterIncomeScreen();
         });
 
       case tabsPage:
         return MaterialPageRoute(builder: (context) {
-          return TabsScreen();
+          return const TabsScreen();
         });
 
       default:
-        throw FormatException('Route not found, check routes!');
+        throw const FormatException('Route not found, check routes!');
     }
   }
 }

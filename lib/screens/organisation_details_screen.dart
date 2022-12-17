@@ -8,7 +8,7 @@ import 'donation_screen.dart';
 
 class OrganisationDetailsScreen extends StatefulWidget {
   final Map obj;
-  User? user = FirebaseAuth.instance.currentUser;
+  final User? user = FirebaseAuth.instance.currentUser;
 
   OrganisationDetailsScreen({Key? key, required this.obj}) : super(key: key);
 
@@ -19,7 +19,7 @@ class OrganisationDetailsScreen extends StatefulWidget {
 
 class _OrganisationDetailsScreenState extends State<OrganisationDetailsScreen> {
   bool isFavourite = false;
-  var data;
+  dynamic data;
   List _favourites = [];
   YoutubePlayerController? _youtubePlayerController;
 
@@ -93,7 +93,7 @@ class _OrganisationDetailsScreenState extends State<OrganisationDetailsScreen> {
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => TabsScreen(),
+                    builder: (context) => const TabsScreen(),
                   ),
                   (route) => false,
                 );
@@ -128,7 +128,7 @@ class _OrganisationDetailsScreenState extends State<OrganisationDetailsScreen> {
               ),
             Padding(
               padding: const EdgeInsets.all(22),
-              child: Container(
+              child: SizedBox(
                 height: MediaQuery.of(context).size.height - 300,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

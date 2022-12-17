@@ -4,13 +4,14 @@ import 'package:donateer/screens/tabs_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:provider/provider.dart';
 
 import './register_details_screen.dart';
 
 class LoginScreen extends StatefulWidget {
+
+  const LoginScreen ({ Key? key }): super(key: key);
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -45,12 +46,11 @@ class _LoginScreenState extends State<LoginScreen> {
   //   return firebaseApp;
   // }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
       height: MediaQuery.of(context).size.height,
         child: Padding(
           padding: const EdgeInsets.all(22),
@@ -81,8 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   */
                 ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.white,
-                    onPrimary: Colors.black,
+                    foregroundColor: Colors.black, backgroundColor: Colors.white,
                   ), 
                   icon: FaIcon(FontAwesomeIcons.google, color: Colors.red[400],),
                   label: const Text('Sign In with Google'), 
@@ -95,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           // Not a new Google user
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                              builder: (context) => TabsScreen(),
+                              builder: (context) => const TabsScreen(),
                             ),
                           ),
                         } else {
@@ -153,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     if (user != null) {
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
-                          builder: (context) => TabsScreen(),
+                          builder: (context) => const TabsScreen(),
                         ),
                       );
                     }
@@ -168,7 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => RegisterDetailsScreen(),
+                        builder: (context) => const RegisterDetailsScreen(),
                       ),
                     );
                   },

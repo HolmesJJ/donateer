@@ -3,7 +3,7 @@ import '../screens/tabs_screen.dart';
 
 class FilterDialog extends StatefulWidget {
 
-  FilterDialog({Key? key}) : super(key: key);
+  const FilterDialog({Key? key}) : super(key: key);
 
   @override
   _FilterDialogState createState() => _FilterDialogState();
@@ -38,7 +38,7 @@ class _FilterDialogState extends State<FilterDialog> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           const Text('CATEGORIES'),
-          Container(
+          SizedBox(
             height: 350.0,
             width: double.maxFinite,
             child: ListView.builder(
