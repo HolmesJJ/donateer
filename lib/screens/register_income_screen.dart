@@ -67,8 +67,7 @@ class _RegisterIncomeScreenState extends State<RegisterIncomeScreen> {
                   const Text(
                       'This information is needed to calculate how much money should be donated according to the number of hours you choose to donateer. It is strictly confidential and will not be disclosed to any third-parties.',
                       ),
-                  const SizedBox(height: 20),    
-                
+                  const SizedBox(height: 20),
                   Form( 
                     child: TextField(
                       onChanged: (value) {
@@ -84,11 +83,32 @@ class _RegisterIncomeScreenState extends State<RegisterIncomeScreen> {
                   controller: incomeController,
                     ),
                   ),
-                  
                   const SizedBox(height: 12),
                   Text('Estimated hourly income: \$$_hourlyIncome'),
-                  
                   const Spacer(),
+                  const Text(
+                      'This step helps you determine your future donations based on how much you would like to dedicate your time at work toward social good.',
+                      ),
+                  const SizedBox(height: 10),
+                  Container(
+                    margin: const EdgeInsets.only(left: 15.0),
+                    child: Column(
+                      children: const [
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text('- Simply enter your best estimate.'),
+                        ),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text('- This information is available to yourself only, and will not be used for any purpose other than that stated above.'),
+                        ),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text('- You can modify this information in the App anytime by updating your profile.'),
+                        ),
+                      ])
+                  ),
+                  const SizedBox(height: 50),
                   ElevatedButton(
                     child: const Text('Finish'),
                     onPressed: () async {

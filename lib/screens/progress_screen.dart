@@ -39,22 +39,29 @@ class _ProgressScreenState extends State<ProgressScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                      IconButton(
+                        icon: const Icon(Icons.arrow_back_ios),
+                        onPressed: () {
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const TabsScreen(tabNo: 2),
+                            ),
+                            (route) => false,
+                          );
+                        }),
+                      const Text(
+                        'My Donateer Contributions',
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                  ]),
                 IconButton(
-                    icon: const Icon(Icons.arrow_back_ios),
+                    icon: const Icon(Icons.share),
                     onPressed: () {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const TabsScreen(tabNo: 2),
-                        ),
-                        (route) => false,
-                      );
                     }),
-                const Text(
-                  'My Donateer Contributions',
-                  style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
-                ),
               ]),
               const SizedBox(height: 10),
               const Text('UPCOMING DONATEER SESSIONS',

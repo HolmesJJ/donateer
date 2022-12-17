@@ -42,7 +42,7 @@ class _RegisterDetailsScreenState extends State<RegisterDetailsScreen> {
         minimum: const EdgeInsets.all(22),
         child: SingleChildScrollView(
           child: SizedBox(
-            height: MediaQuery.of(context).size.height - 44,
+            height: MediaQuery.of(context).size.height - 100,
             child: Form(
               key: _formKey,
               child: Column(
