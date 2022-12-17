@@ -231,8 +231,10 @@ class _OrganisationsOverviewScreenState
                           }
                         },
                       ),
-                      title: Text(_resultsList[index]['name'],
-                          style: const TextStyle(fontWeight: FontWeight.bold)),
+                      title: Text(
+                        _resultsList[index]['name'], overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(fontWeight: FontWeight.bold)
+                      ),
                     ),
                     Image.network(_resultsList[index]['imageUrl'],
                         height: 145, fit: BoxFit.fitWidth),

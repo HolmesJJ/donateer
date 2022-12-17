@@ -19,7 +19,7 @@ class _IntroductionScreenState
         minimum: const EdgeInsets.all(22),
         child: SingleChildScrollView(
           child: SizedBox(
-            height: MediaQuery.of(context).size.height - 44,
+            height: MediaQuery.of(context).size.height - 100,
               child: Column(
                 children: <Widget>[
                   Text('Introduction',
@@ -31,7 +31,6 @@ class _IntroductionScreenState
                   const SizedBox(height: 15),
                   Text('Be a donateer today!',
                       style: Theme.of(context).textTheme.headline1),
-
                   const Spacer(),
                   ElevatedButton(
                     child: const Text('Donate!'),

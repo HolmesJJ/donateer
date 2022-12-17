@@ -51,9 +51,9 @@ class _ProgressScreenState extends State<ProgressScreen> {
                         (route) => false,
                       );
                     }),
-                Text(
+                const Text(
                   'My Donateer Contributions',
-                  style: Theme.of(context).textTheme.headline1,
+                  style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ]),
               const SizedBox(height: 10),

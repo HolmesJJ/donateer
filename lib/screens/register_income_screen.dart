@@ -58,7 +58,7 @@ class _RegisterIncomeScreenState extends State<RegisterIncomeScreen> {
       minimum: const EdgeInsets.all(22),
       child: SingleChildScrollView(
         child: SizedBox(
-            height: MediaQuery.of(context).size.height - 44,
+            height: MediaQuery.of(context).size.height - 100,
               child: Column(
                 children: <Widget>[
                   Text('Step 2/2:\nLet’s help you set an estimate of your hourly income!',
