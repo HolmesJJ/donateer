@@ -30,12 +30,6 @@ class _OrganisationDetailsScreenState extends State<OrganisationDetailsScreen> {
     getData();
   }
 
-  @override
-  void dispose() {
-    releaseVideo();
-    super.dispose();
-  }
-
   getData() async {
     data = await FirebaseFirestore.instance
         .collection('Users')
@@ -76,10 +70,9 @@ class _OrganisationDetailsScreenState extends State<OrganisationDetailsScreen> {
     );
   }
 
-  releaseVideo() {
+  pauseVideo() {
     if (_youtubePlayerController != null) {
-      _youtubePlayerController!.dispose();
-      _youtubePlayerController = null;
+      _youtubePlayerController!.pause();
     }
   }
 
@@ -90,6 +83,7 @@ class _OrganisationDetailsScreenState extends State<OrganisationDetailsScreen> {
           leading: IconButton(
               icon: const Icon(Icons.arrow_back_ios),
               onPressed: () {
+                pauseVideo();
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
@@ -176,11 +170,12 @@ class _OrganisationDetailsScreenState extends State<OrganisationDetailsScreen> {
                         textAlign: TextAlign.center
                       ),
                       onPressed: () {
+                        pauseVideo();
                         Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                DonationScreen(obj: widget.obj),
+                            builder: (context) => 
+                                DonationScreen(isFavourite: isFavourite, obj: widget.obj),
                           ),
                           (route) => false,
                         );

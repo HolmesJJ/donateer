@@ -10,9 +10,10 @@ import '../screens/donation_screen.dart';
 class DonateDialog extends StatefulWidget {
   final String name;
   final String iconUrl;
+  final bool isFavourite;
   final Map obj;
 
-  const DonateDialog({Key? key, required this.name, required this.iconUrl, required this.obj})
+  const DonateDialog({Key? key, required this.name, required this.iconUrl, required this.isFavourite, required this.obj})
       : super(key: key);
   @override
   _DonateDialogState createState() => _DonateDialogState();
@@ -88,7 +89,7 @@ class _DonateDialogState extends State<DonateDialog> {
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(
-        builder: (ctx) => DonationScreen(obj: widget.obj),
+        builder: (ctx) => DonationScreen(isFavourite: widget.isFavourite, obj: widget.obj),
       ),
       (route) => false,
     );

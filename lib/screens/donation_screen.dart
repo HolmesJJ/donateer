@@ -7,8 +7,9 @@ import './organisation_details_screen.dart';
 class DonationScreen extends StatelessWidget {
   final Map obj;
   final User? user = FirebaseAuth.instance.currentUser;
+  final bool isFavourite;
 
-  DonationScreen({Key? key, required this.obj}) : super(key: key);
+  DonationScreen({Key? key, required this.isFavourite, required this.obj}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,12 @@ class DonationScreen extends StatelessWidget {
           title: Text(obj['name']),
           actions: <Widget>[
             IconButton(
-                icon: const Icon(Icons.favorite_outline_rounded),
+                icon: isFavourite
+                    ? Icon(
+                        Icons.favorite,
+                        color: Colors.red[400],
+                      )
+                    : const Icon(Icons.favorite_outline_rounded),
                 onPressed: () {})
           ]),
       body: SingleChildScrollView(
@@ -53,7 +59,7 @@ class DonationScreen extends StatelessWidget {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return DonateDialog(name: obj['name'], iconUrl: obj['iconUrl'], obj: obj);
+                        return DonateDialog(name: obj['name'], iconUrl: obj['iconUrl'], isFavourite: isFavourite, obj: obj);
                       },
                     );
                   },
