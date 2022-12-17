@@ -64,7 +64,7 @@ class _RegisterIncomeScreenState extends State<RegisterIncomeScreen> {
                       style: Theme.of(context).textTheme.headline1),
                   const SizedBox(height: 15),
                   const Text(
-                      'This information is needed to calculate how much money should be donated according to the number of hours you choose to volunteer. It is strictly confidential and will not be disclosed to any third-parties.',
+                      'This information is needed to calculate how much money should be donated according to the number of hours you choose to donateer. It is strictly confidential and will not be disclosed to any third-parties.',
                       ),
                   const SizedBox(height: 20),    
                 

@@ -112,7 +112,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'My Profile',
+                  'My Donateer Profile',
                   style: Theme.of(context).textTheme.headline1,
                 ),
                 IconButton(
@@ -201,7 +201,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       },
                     ),
                     title: const Text(
-                      'My Progress',
+                      'My Donateer Contributions',
                       style: TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
@@ -216,22 +216,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
-                  child: Card(
-                    child: ListTile(
-                      title:
-                          Text('${hoursDonated}', textAlign: TextAlign.center),
-                      subtitle: const Text('total volunteered',
-                          textAlign: TextAlign.center),
+                  child: Container(
+                    height: 80,
+                    child: Card(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: ListTile(
+                          title: Text(hoursDonated, textAlign: TextAlign.center),
+                          subtitle: const Text('total donateered', textAlign: TextAlign.center),
+                        ),
+                      ),
                     ),
                   ),
                 ),
                 Expanded(
-                  child: Card(
-                    child: ListTile(
-                      title:
-                          Text('${hoursToDonate}', textAlign: TextAlign.center),
-                      subtitle: const Text('pending volunteer',
-                          textAlign: TextAlign.center),
+                  child: Container(
+                    height: 80,
+                    child: Card(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: ListTile(
+                          title: Text(hoursToDonate, textAlign: TextAlign.center),
+                          subtitle: const Text('upcoming this month', textAlign: TextAlign.center),
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -241,24 +249,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
-                  child: Card(
-                    child: ListTile(
-                      title: Text('\$ ${amountDonated}',
-                          textAlign: TextAlign.center),
-                      subtitle: const Text('total donated',
-                          textAlign: TextAlign.center),
+                  child: Container(
+                    height: 80,
+                    child: Card(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: ListTile(
+                          title: Text('\$ $amountDonated', textAlign: TextAlign.center),
+                          subtitle: const Text('donations generated', textAlign: TextAlign.center),
+                        ),
+                      ),
                     ),
                   ),
                 ),
                 Expanded(
-                  child: Card(
-                    child: ListTile(
-                      title: Text('\$ ${amountToDonate}',
-                          textAlign: TextAlign.center),
-                      subtitle: const Text('pending donation',
-                          textAlign: TextAlign.center),
+                  child: Container(
+                    height: 80,
+                    child: Card(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: ListTile(
+                          title: Text('\$ $amountToDonate', textAlign: TextAlign.center),
+                          subtitle: const Text('more contributions pledged this month', textAlign: TextAlign.center),
+                        ),
+                      ),
                     ),
-                  ),
+                  ), 
                 ),
               ],
             ),

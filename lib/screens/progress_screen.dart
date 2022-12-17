@@ -50,12 +50,12 @@ class _ProgressScreenState extends State<ProgressScreen> {
                       );
                     }),
                 Text(
-                  'My Progress',
+                  'My Donateer Contributions',
                   style: Theme.of(context).textTheme.headline1,
                 ),
               ]),
               const SizedBox(height: 10),
-              const Text('PENDING CONTRIBUTIONS',
+              const Text('UPCOMING DONATEER SESSIONS',
                   style: TextStyle(
                     fontSize: 15.0,
                   )),
