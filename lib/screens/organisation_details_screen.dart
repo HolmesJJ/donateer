@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import './tabs_screen.dart';
 import 'donation_screen.dart';
@@ -20,11 +21,19 @@ class _OrganisationDetailsScreenState extends State<OrganisationDetailsScreen> {
   bool isFavourite = false;
   var data;
   List _favourites = [];
+  YoutubePlayerController? _youtubePlayerController;
 
   @override
   void initState() {
-    getData();
     super.initState();
+    initVideo();
+    getData();
+  }
+
+  @override
+  void dispose() {
+    releaseVideo();
+    super.dispose();
   }
 
   getData() async {
@@ -55,6 +64,23 @@ class _OrganisationDetailsScreenState extends State<OrganisationDetailsScreen> {
         .collection('Users')
         .doc(widget.user!.uid)
         .update({'favourites': _favourites});
+  }
+
+  initVideo() {
+    _youtubePlayerController = YoutubePlayerController(
+      initialVideoId: widget.obj['videoUrl'],
+      flags: const YoutubePlayerFlags(
+        autoPlay: true,
+        mute: false,
+      ),
+    );
+  }
+
+  releaseVideo() {
+    if (_youtubePlayerController != null) {
+      _youtubePlayerController!.dispose();
+      _youtubePlayerController = null;
+    }
   }
 
   @override
@@ -95,10 +121,11 @@ class _OrganisationDetailsScreenState extends State<OrganisationDetailsScreen> {
           ]),
       body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Image.network(widget.obj['imageUrl'],
-                height: 145, fit: BoxFit.fitWidth),
+            if (_youtubePlayerController != null)
+              YoutubePlayer(
+                controller: _youtubePlayerController!,
+              ),
             Padding(
               padding: const EdgeInsets.all(22),
               child: Container(
@@ -143,7 +170,11 @@ class _OrganisationDetailsScreenState extends State<OrganisationDetailsScreen> {
                       ],
                     ),
                     ElevatedButton(
-                      child: const Text('I would like to contribute to this charity'),
+                      child: const Text(
+                        'I WOULD LIKE TO CONTRIBUTE TO THIS CHARITY',
+                        style: TextStyle(fontSize: 13.0),
+                        textAlign: TextAlign.center
+                      ),
                       onPressed: () {
                         Navigator.pushAndRemoveUntil(
                           context,

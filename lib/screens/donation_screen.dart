@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../widgets/donate_dialog.dart';
 import './organisation_details_screen.dart';
@@ -36,16 +35,10 @@ class DonationScreen extends StatelessWidget {
         child: Container(
           height: MediaQuery.of(context).size.height - 140,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              YoutubePlayer(
-                controller: YoutubePlayerController(
-                  initialVideoId: obj["videoUrl"],
-                  flags: const YoutubePlayerFlags(
-                    autoPlay: true,
-                    mute: false,
-                  ),
-                ),
-              ),
+              Image.network(obj['imageUrl'],
+                height: 250, fit: BoxFit.fitWidth),
               const SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
