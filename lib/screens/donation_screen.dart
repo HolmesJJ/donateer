@@ -53,7 +53,7 @@ class DonationScreen extends StatelessWidget {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return DonateDialog(name: obj['name'], obj: obj);
+                        return DonateDialog(name: obj['name'], iconUrl: obj['iconUrl'], obj: obj);
                       },
                     );
                   },

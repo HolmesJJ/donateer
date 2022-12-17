@@ -84,6 +84,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                               '\n' +
                               widget.donated[index]['date'],
                         ),
+                        trailing: Image.network(widget.donated[index]['iconUrl'])
                         // trailing: IconButton(
                         //   icon: Icon(
                         //     Icons.delete,
@@ -129,7 +130,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                               '\n' +
                               widget.donated[index]['date'],
                         ),
-
+                        trailing: Image.network(widget.donated[index]['iconUrl'])
                         // trailing: IconButton(
                         //   icon: Icon(
                         //     Icons.delete,

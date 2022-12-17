@@ -49,7 +49,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     donations.forEach((donation) {
       DateTime startTime = DateTime.parse(donation['start']);
       int duration = donation['duration'];
-      double amount = donation['donationAmount'];
+      double amount = donation['donationAmount'].toDouble();
       if (startTime.isBefore(DateTime.now())) {
         timeDonated += duration;
         amountDonated += amount;

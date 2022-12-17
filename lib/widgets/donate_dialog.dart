@@ -9,9 +9,10 @@ import '../screens/donation_screen.dart';
 
 class DonateDialog extends StatefulWidget {
   final String name;
+  final String iconUrl;
   final Map obj;
 
-  DonateDialog({Key? key, required this.name, required this.obj})
+  DonateDialog({Key? key, required this.name, required this.iconUrl, required this.obj})
       : super(key: key);
   @override
   _DonateDialogState createState() => _DonateDialogState();
@@ -74,6 +75,7 @@ class _DonateDialogState extends State<DonateDialog> {
     var formattedDate = DateFormat.yMMMMd().format(selectedDate);
     _donations.add({
       'name': widget.name,
+      'iconUrl': widget.iconUrl,
       'start': startHour,
       'end': endHour,
       'duration': duration.inMinutes,
