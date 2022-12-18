@@ -46,10 +46,10 @@ class _ProgressScreenState extends State<ProgressScreen> {
     return result["filePath"];
   }
 
-  saveAndShare(Uint8List bytes) async {
+  saveAndShare(Uint8List bytes, String name) async {
     await [Permission.storage].request();
     final directory = await getApplicationDocumentsDirectory();
-    final image = File("${directory.path}/donateer.png");
+    final image = File("${directory.path}/$name.png");
     image.writeAsBytesSync(bytes);
     await Share.shareFiles([image.path], text: "Hey, I would like to share my donateer contributions with you!");
   }
@@ -89,8 +89,8 @@ class _ProgressScreenState extends State<ProgressScreen> {
                       onPressed: () async {
                         final image = await _screenshotController.capture();
                         if (image == null) return;
-                        // saveAndShare(image);
-                        saveImage(image, "donateer");
+                        saveAndShare(image, "donateer");
+                        // saveImage(image, "donateer");
                       }),
                 ]),
                 const SizedBox(height: 10),
