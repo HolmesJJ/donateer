@@ -54,7 +54,7 @@ class DonationScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 22),
                 child: ElevatedButton(
-                  child: const Text('DONATE YOUR TIME'),
+                  child: const Text('DONATEER'),
                   onPressed: () {
                     showDialog(
                       context: context,

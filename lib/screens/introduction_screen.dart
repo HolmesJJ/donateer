@@ -38,7 +38,7 @@ class _IntroductionScreenState
                         style: Theme.of(context).textTheme.headline1),
                     const Spacer(),
                     ElevatedButton(
-                      child: const Text('Donate!'),
+                      child: const Text('PROCEED!'),
                       onPressed: () async {
                         Navigator.of(context)
                           .pushAndRemoveUntil(

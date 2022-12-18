@@ -110,7 +110,7 @@ class _RegisterIncomeScreenState extends State<RegisterIncomeScreen> {
                   ),
                   const SizedBox(height: 50),
                   ElevatedButton(
-                    child: const Text('Finish'),
+                    child: const Text('FINISH'),
                     onPressed: () async {
                       if (widget.userName != null) {
                         User? user = await FirebaseAuth.instance

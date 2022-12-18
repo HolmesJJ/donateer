@@ -92,7 +92,7 @@ class _RegisterDetailsScreenState extends State<RegisterDetailsScreen> {
                   ),
                   const Spacer(),
                   ElevatedButton(
-                    child: const Text('Continue'),
+                    child: const Text('CONTINUE'),
                     onPressed: trySubmit,
                   ),
                   TextButton(

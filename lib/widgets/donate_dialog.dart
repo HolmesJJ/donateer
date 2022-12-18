@@ -107,7 +107,7 @@ class _DonateDialogState extends State<DonateDialog> {
 
   Event getEvent(start, end) {
     Event event = Event(
-      title: 'Donation to: ' + widget.name,
+      title: 'Donateer for: ' + widget.name,
       description: widget.obj["description"].replaceAll("\\n", "\n") +
           '\nDonation link: ' +
           widget.obj["donationUrl"],

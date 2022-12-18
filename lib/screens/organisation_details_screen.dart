@@ -184,8 +184,7 @@ class _OrganisationDetailsScreenState extends State<OrganisationDetailsScreen> {
                     const Spacer(),
                     ElevatedButton(
                       child: const Text(
-                        'I WOULD LIKE TO CONTRIBUTE TO THIS CHARITY',
-                        style: TextStyle(fontSize: 13.0),
+                        'I WANT TO CONTRIBUTE TO THIS CHARITY',
                         textAlign: TextAlign.center
                       ),
                       onPressed: () {

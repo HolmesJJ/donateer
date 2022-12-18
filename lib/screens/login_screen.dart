@@ -140,7 +140,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const Spacer(),
                 ElevatedButton(
-                  child: const Text('Log in'),
+                  child: const Text('LOGIN'),
                   onPressed: () async {
                     _trySubmit();
                     User? user =
