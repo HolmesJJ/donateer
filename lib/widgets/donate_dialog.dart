@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:intl/intl.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../screens/donation_screen.dart';
 
@@ -40,12 +41,13 @@ class _DonateDialogState extends State<DonateDialog> {
   }
 
   getData() async {
-    var data = await FirebaseFirestore.instance
+    DocumentSnapshot doc = await FirebaseFirestore.instance
         .collection('Users')
         .doc(user!.uid)
         .get();
+    final data = doc.data() as Map<String, dynamic>;
     setState(() {
-      if (data['donations'] != null) {
+      if (data.containsKey('donations') && data['donations'] != null) {
         _donations = data['donations'];
       } else {
         _donations = [];
@@ -84,6 +86,7 @@ class _DonateDialogState extends State<DonateDialog> {
       'donationAmount': double.parse(amount),
     });
     updateFirestore();
+    await [Permission.calendar].request();
     Add2Calendar.addEvent2Cal(getEvent(startHour, endHour));
 
     Navigator.pushAndRemoveUntil(
@@ -116,7 +119,7 @@ class _DonateDialogState extends State<DonateDialog> {
 
   /// This decides which day will be enabled
   /// This will be called every time while displaying day in calender.
-  bool _decideWhichDayToEnable(DateTime day) {
+  bool decideWhichDayToEnable(DateTime day) {
     if ((day.isAfter(DateTime.now().subtract(const Duration(days: 1))) &&
         day.isBefore(DateTime.now().add(const Duration(days: 30))))) {
       return true;
@@ -124,13 +127,13 @@ class _DonateDialogState extends State<DonateDialog> {
     return false;
   }
 
-  Future<void> _selectStartDate(BuildContext context) async {
+  Future<void> selectStartDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: selectedDate,
       initialDatePickerMode: DatePickerMode.day,
       firstDate: DateTime.now(),
-      selectableDayPredicate: _decideWhichDayToEnable,
+      selectableDayPredicate: decideWhichDayToEnable,
       lastDate: DateTime(2100),
     );
     if (picked != null) {
@@ -164,7 +167,7 @@ class _DonateDialogState extends State<DonateDialog> {
               ),
               InkWell(
                 onTap: () {
-                  _selectStartDate(context);
+                  selectStartDate(context);
                 },
                 child: Container(
                   alignment: Alignment.center,
@@ -317,7 +320,8 @@ class _DonateDialogState extends State<DonateDialog> {
               ElevatedButton(
                 child: const Text("Submit"),
                 onPressed: () {
-                  // _trySubmit();
+                  // trySubmit();
+                  if (startHour.isEmpty || endHour.isEmpty) return;
                   var duration = DateTime.parse(endHour)
                       .difference(DateTime.parse(startHour));
                   if (duration > Duration.zero) {

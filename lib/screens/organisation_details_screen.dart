@@ -30,6 +30,18 @@ class _OrganisationDetailsScreenState extends State<OrganisationDetailsScreen> {
     getData();
   }
 
+  @override
+  void deactivate() {
+    pauseVideo();
+    super.deactivate();
+  }
+
+  @override
+  void dispose() {
+    releaseVideo();
+    super.dispose();
+  }
+
   getData() async {
     data = await FirebaseFirestore.instance
         .collection('Users')
@@ -73,6 +85,12 @@ class _OrganisationDetailsScreenState extends State<OrganisationDetailsScreen> {
   pauseVideo() {
     if (_youtubePlayerController != null) {
       _youtubePlayerController!.pause();
+    }
+  }
+
+  releaseVideo() {
+    if (_youtubePlayerController != null) {
+      _youtubePlayerController!.dispose();
     }
   }
 
@@ -123,7 +141,7 @@ class _OrganisationDetailsScreenState extends State<OrganisationDetailsScreen> {
             Padding(
               padding: const EdgeInsets.all(22),
               child: SizedBox(
-                height: MediaQuery.of(context).size.height - 400,
+                height: MediaQuery.of(context).size.height - 300,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

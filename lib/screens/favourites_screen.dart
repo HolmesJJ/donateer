@@ -38,13 +38,14 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
   }
 
   getResultsList() async {
-    var fav = await FirebaseFirestore.instance
+    DocumentSnapshot doc = await FirebaseFirestore.instance
         .collection('Users')
         .doc(user!.uid)
         .get();
+    final data = doc.data() as Map<String, dynamic>;
     setState(() {
-      if (fav['favourites'] != null) {
-        _favourites = fav['favourites'];
+      if (data.containsKey('favourites') && data['favourites'] != null) {
+        _favourites = data['favourites'];
       } else {
         _favourites = [];
       }

@@ -48,39 +48,41 @@ class _ProfileScreenState extends State<ProfileScreen> {
         .doc(user!.uid)
         .get();
     final data = doc.data() as Map<String, dynamic>;
-    var donations = data['donations'];
-    // print("Donations");
-    // print(donations);
-    donations.forEach((donation) {
-      DateTime startTime = DateTime.parse(donation['start']);
-      int duration = donation['duration'];
-      double amount = donation['donationAmount'].toDouble();
-      if (startTime.isBefore(DateTime.now())) {
-        timeDonated += duration;
-        amountDonated += amount;
-        donated.add(donation);
-      } else {
-        timeToDonate += duration;
-        amountToDonate += amount;
-        toDonate.add(donation);
-      }
-    });
-    // print("Results:");
-    // print("Time donated");
-    // print(timeDonated);
-    // print("Amount donated");
-    // print(amountDonated);
-    // print("Time to donate");
-    // print(timeToDonate);
-    // print("Amount to donate");
-    // print(amountToDonate);
-    // print("Formated hours:");
-    // print(hoursDonated);
-    // print(hoursToDonate);
-    setState(() {
-      hoursDonated = formatDuration(Duration(minutes: timeDonated));
-      hoursToDonate = formatDuration(Duration(minutes: timeToDonate));
-    });
+    if (data.containsKey('donations')) {
+      var donations = data['donations'];
+      // print("Donations");
+      // print(donations);
+      donations.forEach((donation) {
+        DateTime startTime = DateTime.parse(donation['start']);
+        int duration = donation['duration'];
+        double amount = donation['donationAmount'].toDouble();
+        if (startTime.isBefore(DateTime.now())) {
+          timeDonated += duration;
+          amountDonated += amount;
+          donated.add(donation);
+        } else {
+          timeToDonate += duration;
+          amountToDonate += amount;
+          toDonate.add(donation);
+        }
+      });
+      // print("Results:");
+      // print("Time donated");
+      // print(timeDonated);
+      // print("Amount donated");
+      // print(amountDonated);
+      // print("Time to donate");
+      // print(timeToDonate);
+      // print("Amount to donate");
+      // print(amountToDonate);
+      // print("Formated hours:");
+      // print(hoursDonated);
+      // print(hoursToDonate);
+      setState(() {
+        hoursDonated = formatDuration(Duration(minutes: timeDonated));
+        hoursToDonate = formatDuration(Duration(minutes: timeToDonate));
+      });
+    }
   }
 
   String formatDuration(Duration duration) {

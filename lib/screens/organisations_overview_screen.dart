@@ -88,12 +88,13 @@ class _OrganisationsOverviewScreenState
   }
 
   getFavourites() async {
-    var data = await FirebaseFirestore.instance
+    DocumentSnapshot doc = await FirebaseFirestore.instance
         .collection('Users')
         .doc(user!.uid)
         .get();
+    final data = doc.data() as Map<String, dynamic>;
     setState(() {
-      if (data['favourites'] != null) {
+      if (data.containsKey('favourites') && data['favourites'] != null) {
         _favourites = data['favourites'];
       } else {
         _favourites = [];
