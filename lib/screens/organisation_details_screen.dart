@@ -141,7 +141,7 @@ class _OrganisationDetailsScreenState extends State<OrganisationDetailsScreen> {
             Padding(
               padding: const EdgeInsets.all(22),
               child: SizedBox(
-                height: MediaQuery.of(context).size.height - 300,
+                height: MediaQuery.of(context).size.height - 350,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -181,6 +181,7 @@ class _OrganisationDetailsScreenState extends State<OrganisationDetailsScreen> {
                         ]),
                       ],
                     ),
+                    const Spacer(),
                     ElevatedButton(
                       child: const Text(
                         'I WOULD LIKE TO CONTRIBUTE TO THIS CHARITY',

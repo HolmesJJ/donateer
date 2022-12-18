@@ -89,7 +89,8 @@ class _ProgressScreenState extends State<ProgressScreen> {
                       onPressed: () async {
                         final image = await _screenshotController.capture();
                         if (image == null) return;
-                        saveAndShare(image);
+                        // saveAndShare(image);
+                        saveImage(image, "donateer");
                       }),
                 ]),
                 const SizedBox(height: 10),
@@ -121,9 +122,9 @@ class _ProgressScreenState extends State<ProgressScreen> {
                                     ),
                                   ) +
                                   '\n' +
-                                  widget.donated[index]['date'],
+                                  widget.toDonate[index]['date'],
                             ),
-                            trailing: Image.network(widget.donated[index]['iconUrl'])
+                            trailing: Image.network(widget.toDonate[index]['iconUrl'])
                             // trailing: IconButton(
                             //   icon: Icon(
                             //     Icons.delete,

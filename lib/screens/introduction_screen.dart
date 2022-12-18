@@ -24,7 +24,7 @@ class _IntroductionScreenState
           minimum: const EdgeInsets.all(22),
           child: SingleChildScrollView(
             child: SizedBox(
-              height: MediaQuery.of(context).size.height - 44,
+              height: MediaQuery.of(context).size.height - 50,
                 child: Column(
                   children: <Widget>[
                     Text('Introduction',

@@ -39,7 +39,7 @@ class DonationScreen extends StatelessWidget {
           ]),
       body: SingleChildScrollView(
         child: SizedBox(
-          height: MediaQuery.of(context).size.height - 44,
+          height: MediaQuery.of(context).size.height - 100,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
